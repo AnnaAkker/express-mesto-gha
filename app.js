@@ -14,12 +14,12 @@ mongoose.connect(DB_URL, {
   useUnifiedtopology: true,
 });
 
-// app.use((req, res, next) => {
-//   req.user = {
-//     _id: '64f4f3187018ac238ba5f8cf',
-//   };
-//   next();
-// });
+app.use((req, res, next) => {
+  req.user = {
+    _id: '64f4f4a143060466acb20b51',
+  };
+  next();
+});
 
 app.use('/users', require('./routers/users'));
 app.use('/cards', require('./routers/cards'));
