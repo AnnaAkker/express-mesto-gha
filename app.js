@@ -22,6 +22,6 @@ mongoose.connect(DB_URL, {
 // });
 
 app.use('/users', require('./routers/users'));
-app.use('/cards', require('./routers/cards'))
+app.use('/cards', require('./routers/cards'));
 
 app.listen(PORT);
