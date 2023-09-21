@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
-const HandlerError = require('./middlewares/handlerError');
+const handlerError = require('./middlewares/handlerErr');
 
 const { PORT = 3000, DB_URL = 'mongodb://localhost:27017/mestodb' } = process.env;
 
@@ -23,5 +23,5 @@ app.use('*', (req, res) => {
 });
 
 app.use(errors());
-app.use(HandlerError);
+app.use(handlerError);
 app.listen(PORT);
