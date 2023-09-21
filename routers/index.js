@@ -16,7 +16,7 @@ router.use('/users', auth, users);
 router.use('/cards', auth, cards);
 
 router.use('*', (req, res, next) => {
-  next(new NotFoundError('Cтраница не найдена.'));
+  next(new NotFoundError('Cтраница не найдена'));
 });
 
 module.exports = router;
