@@ -1,6 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const { errors } = require('celebrate');
+const HandlerError = require('./middlewares/HandlerError');
 
 const { PORT = 3000, DB_URL = 'mongodb://localhost:27017/mestodb' } = process.env;
 
@@ -14,18 +16,12 @@ mongoose.connect(DB_URL, {
   useUnifiedtopology: true,
 });
 
-app.use((req, res, next) => {
-  req.user = {
-    _id: '64f4f4a143060466acb20b51',
-  };
-  next();
-});
-
-app.use('/users', require('./routers/users'));
-app.use('/cards', require('./routers/cards'));
+app.use('/', require('./routers/index'));
 
 app.use('*', (req, res) => {
   res.status(404).send({ message: 'Такая страница не найдена' });
 });
 
+app.use(errors());
+app.use(HandlerError);
 app.listen(PORT);
