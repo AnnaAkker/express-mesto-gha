@@ -10,12 +10,14 @@ const userSchema = new mongoose.Schema({
     required: [true, 'Поле ввода должно быть заполнено'],
     minlength: [2, 'Минимальная длина поля 2 символа'],
     maxlength: [30, 'Максимальная длина поля 30 смиволов'],
+    default: 'Жак-Ив Кусто',
   },
   about: {
     type: String,
     required: [true, 'Поле ввода должно быть заполнено'],
     minlength: [2, 'Минимальная длина поля 2 символа'],
     maxlength: [30, 'Максимальная длина поля 30 смиволов'],
+    default: 'Исследователь',
   },
   avatar: {
     type: String,
@@ -25,6 +27,7 @@ const userSchema = new mongoose.Schema({
       },
       message: 'Введите URL',
     },
+    default: 'https://pictures.s3.yandex.net/resources/jacques-cousteau_1604399756.png',
   },
   email: {
     type: String,
@@ -49,12 +52,12 @@ userSchema.statics.findUserByCredentials = async function findUserByCredentials(
     .select('+password')
     .then((user) => {
       if (!user) {
-        throw new UnauthorizedError('Неправильная почта или пароль');
+        throw new UnauthorizedError('Неправильные почта или пароль');
       }
       return bcrypt.compare(password, user.password)
         .then((matched) => {
           if (!matched) {
-            throw new UnauthorizedError('Неправильная почта или пароль');
+            throw new UnauthorizedError('Неправильные почта или пароль');
           }
           return user;
         });
