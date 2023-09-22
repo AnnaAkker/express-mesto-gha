@@ -1,5 +1,4 @@
 const router = require('express').Router();
-
 const { celebrate, Joi } = require('celebrate');
 const { urlRegex } = require('../regex/regex');
 
@@ -21,13 +20,13 @@ router.patch('/me', celebrate({
   body: Joi.object().keys({
     name: Joi.string().min(2).max(30),
     about: Joi.string().min(2).max(30),
-  }),
+  }).required(),
 }), editUserData);
 
 router.patch('/me/avatar', celebrate({
   body: Joi.object().keys({
     avatar: Joi.string().pattern(urlRegex),
-  }),
+  }).required(),
 }), editUserAvatar);
 
 module.exports = router;

@@ -7,14 +7,12 @@ const UnauthorizedError = require('../errors/UnauthorizedError');
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, 'Поле ввода должно быть заполнено'],
     minlength: [2, 'Минимальная длина поля 2 символа'],
     maxlength: [30, 'Максимальная длина поля 30 смиволов'],
     default: 'Жак-Ив Кусто',
   },
   about: {
     type: String,
-    required: [true, 'Поле ввода должно быть заполнено'],
     minlength: [2, 'Минимальная длина поля 2 символа'],
     maxlength: [30, 'Максимальная длина поля 30 смиволов'],
     default: 'Исследователь',
