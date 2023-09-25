@@ -20,8 +20,8 @@ mongoose.connect(DB_URL, {
 
 app.use('/', require('./routers/index'));
 
-app.use('*', () => {
-  throw new NotFoundError('Такая страница не найдена');
+app.use('*', (req, res, next) => {
+  next(new NotFoundError('Такая страница не найдена'));
 });
 
 app.use(errors());
